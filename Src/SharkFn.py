@@ -2,58 +2,31 @@ import pandas as pd
 import numpy as np
 import re
 
+
 def clean_last_ws (serie):
+    # Esta función limpia el último espacio de una cadena de str.
     return serie.replace("\s$", "")
 
 def clean_first_ws (serie):
+    # Esta función limpia el primer espacio de una cadena de str.
     return serie.replace("^\s", "")
 
 def clean_mult_ws (serie):
+    # Esta función en caso de haber dos espacios seguidos limpia uno de ellos.
     return serie.replace("\s+", " ")
 
 def clean_weird_ch (serie):
+    # Esta función limpia de caracteres raros que puedan impedir una RegEx para muchos datos
     return serie.replace("[\[\]\,\"\'\\\.\-\?\<\>\*\&\;\+\(\)]", "")
 
 def clean_num (serie):
+    # Esta función elimina dígitos almacenados donde no deberían estar.
     return serie.replace("[\d]", "")
 
 def clean_1to2_ch (serie):
+    #Esta función elimina palabras de 2 o menos caracteres.
     aux = serie.replace("\s\w{1,2}\s", " ")
     aux1 = aux.replace("\s\w{1,2}\s", " ")
     aux2 = aux1.replace("\s\w{1,2}\s", " ")
     return aux2.replace("\s\w{1,2}\s", " ")
-    
-def shark_sp (serie):
-    return serie.replace(r'(?!\w+\sshark)\b([\S\s]+?)(\b|$)', lambda x: (x.end() - x.start())*'') 
-
-'''
-df_sp = df_raw
-df_sp.loc[(df_sp.Species == ''), 'Species'] = np.nan
-
-df_sp.Species.fillna('shark', inplace = True)
-df_sp.Species = df_sp.Species.str.lower()
-
-df_sp1 = df_sp
-df_sp1.Species = df_sp1.Species.str.findall("\w+\sshark")
-
-lst_cc_sp = []
-for e in df_sp1.Species:
-    if e == []:
-        lst_cc_sp.append("undef. shark")
-    else:
-        lst_cc_sp.append(e[0])
-
-df_sp1["Shark_sp"] = lst_cc_sp
-df_sp1.Shark_sp.value_counts()
-
-df_sp1.loc[(df_sp1.Shark_sp == 'to shark')|
-           (df_sp1.Shark_sp == 'small shark')|
-           (df_sp1.Shark_sp == 'm shark')|
-           (df_sp1.Shark_sp == 'involve shark')|
-           (df_sp1.Shark_sp == 'kg shark')|
-           (df_sp1.Shark_sp =='lb shark'), 'Shark_sp'] = "undef. shark"
-
-df_sp1.Shark_sp.value_counts()
-'''
-
     
