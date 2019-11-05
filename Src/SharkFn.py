@@ -30,3 +30,21 @@ def clean_1to2_ch (serie):
     aux2 = aux1.replace("\s\w{1,2}\s", " ")
     return aux2.replace("\s\w{1,2}\s", " ")
     
+'''
+# Code 1
+sharkUSA = sharky.loc[(shark['Country'] == 'USA')]
+sharkAUS = sharky.loc[(shark['Country'] == 'AUSTRALIA')]
+sharkSA = sharky.loc[(shark['Country'] == 'SOUTH AFRICA')]
+sharkPNG = sharky.loc[(shark['Country'] == 'PAPUA NEW GUINEA')]
+sharkBRZ = sharky.loc[(shark['Country'] == 'BRAZIL')]
+​
+# Code 2 - Refactor
+def generaFiltros(paises):
+  filtosPaises = dict()
+  for pais in paises:
+    filtrosPaises[pais] = sharky.loc[(shark['Country'] == pais)]
+  return filtrosPaises
+​
+paises = ['USA','AUSTRALIA','SOUTH AFRICA','PAPUA NEW GUINEA']
+df = generaFiltros(paises)['USA']
+'''
